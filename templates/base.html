@@ -1,6 +1,7 @@
 <!Doctype html>
 <html lang="en">
   <head>
+    <title>{{ title }}</title>
     <meta charset="UTF-8">
     <!--<link rel="stylesheet" type="text/css"
       href="{{ url_for('static', filename='css/main_style.css') }}">-->
@@ -31,140 +32,31 @@
           <li class="nav-item">
             <a class="nav-link" href="#">Category</a>
           </li>
+          {% for ddItem in dropdown_items %}
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+            <a class="nav-link dropdown-toggle" href="{{  }}" id="navbarDropdown"
               role="button" data-toggle="dropdown" aria-haspopup="true"
               aria-expanded="false">
-              Category 1
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-              <div class="container">
-                <div class="row">
-                  <div class="col-md-4">
-                    <ul class="nav flex-column">
-                      <li class="nav-item">
-                        <a class="nav-link active" href="#">Active</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="#">Link item</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="#">Link item</a>
-                      </li>
-                    </ul>
-                  </div>
-                  <!-- /.col-md-4  -->
-                  <div class="col-md-4">
-                    <ul class="nav flex-column">
-                      <li class="nav-item">
-                        <a class="nav-link active" href="#">Active</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="#">Link item</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="#">Link item</a>
-                      </li>
-                    </ul>
-                  </div>
-                  <!-- /.col-md-4  -->
-                  <!-- /.col-md-4  -->
-                </div>
-              </div>
-              <!--  /.container  -->
-
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-              role="button" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">
-              Category 2
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-
-              <div class="container">
-                <div class="row">
-                  <div class="col-md-4">
-                    <ul class="nav flex-column">
-                      <li class="nav-item">
-                        <a class="nav-link active" href="#">Active</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="#">Link item</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="#">Link item</a>
-                      </li>
-                    </ul>
-                  </div>
-                  <!-- /.col-md-4  -->
-                  <div class="col-md-4">
-                    <ul class="nav flex-column">
-                      <li class="nav-item">
-                        <a class="nav-link active" href="#">Active</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="#">Link item</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="#">Link item</a>
-                      </li>
-                    </ul>
-                  </div>
-                  <!-- /.col-md-4  -->
-                  <!-- /.col-md-4  -->
-                </div>
-              </div>
-              <!--  /.container  -->
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-              role="button" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">
-              Category 3
+              {{ ddItem['name'] }}
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <div class="container">
                 <div class="row">
                   <div class="col-md-4">
                     <ul class="nav flex-column">
+                      {% for item in ddItem['items'] %}
                       <li class="nav-item">
-                        <a class="nav-link active" href="#">Active</a>
+                        <a class="nav-link" href="#">{{ item['name'] }}</a>
                       </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="#">Link item</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="#">Link item</a>
-                      </li>
+                      {% endfor %}
                     </ul>
                   </div>
-                  <!-- /.col-md-4  -->
-                  <div class="col-md-4">
-                    <ul class="nav flex-column">
-                      <li class="nav-item">
-                        <a class="nav-link active" href="#">Active</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="#">Link item</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="#">Link item</a>
-                      </li>
-                    </ul>
-                  </div>
-                  <!-- /.col-md-4  -->
-
-                  <!-- /.col-md-4  -->
                 </div>
               </div>
               <!--  /.container  -->
-
             </div>
           </li>
+          {% endfor %}
         </ul>
       </div>
       <form class="form-inline my-2 my-lg-0">
