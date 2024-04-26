@@ -1,14 +1,43 @@
 /* adds some margin below the link sets  */
 .navbar .dropdown-menu div[class*="col"] {
+
   margin-bottom: 1rem;
 }
 
-.navbar .dropdown-menu {
-  border: none;
-  background-color: #0060c8 !important;
+.navbar-toggler {
+  height: 3.5rem;
 }
 
-/* breakpoint and up - mega dropdown styles */
+.navbar .dropdown-menu {
+  margin-top: 1rem;
+  border: none;
+  background-color: #042a41 !important;
+}
+
+.navbar-brand {
+  margin-left: 1.25rem;
+  margin-right: 1.25rem;
+}
+
+.navbar .form-inline {
+  margin-right: 1rem;
+  margin-left: auto;
+  display: flex;
+}
+
+.dropdown-menu {
+  -moz-border-radius-bottomright: 0.25rem;
+  -moz-border-radius-bottomleft: 0.25rem;
+  border-radius: 0 0 0.25rem 0.25rem !important;
+}
+
+.navbar {
+  background-color: #042a41;
+  height: 3.5rem;
+  flex-wrap: nowrap !important;
+}
+
+/* apply only when screen width 992px or higher */
 @media screen and (min-width: 992px) {
 
   /* remove the padding from the navbar so the dropdown hover state is not broken */
@@ -33,7 +62,7 @@
     left: 0;
     right: 0;
     /*  height of nav-item  */
-    top: 45px;
+    top: 40px;
 
     display: block;
     visibility: hidden;
@@ -41,9 +70,6 @@
     transition: visibility 0s, opacity 0.3s linear;
 
   }
-
-
-
 
   /* shows the dropdown menu on hover */
   .navbar .dropdown:hover .dropdown-menu,
@@ -55,7 +81,7 @@
   }
 
   .navbar .dropdown-menu {
-    border: 1px solid rgba(0, 0, 0, .15);
+
     background-color: #fff;
   }
 
