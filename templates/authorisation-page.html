@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/bg.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/logIn_style.css') }}">
+<script src="{{ url_for('static', filename='scripts/sign-in-up.js') }}"></script>
+<title>LogIn Page</title>
+{% endblock %}
+
+{% block title %}Authorisation{% endblock %}
+
+{% block body %}
+<section class="center">
+  <div class="signin">
+    <div class="content" id="changeform">
+      <h2>Sign In</h2>
+      <div class="form">
+        <div class="inputBox">
+          <input type="text" required> <i>Username</i>
+        </div>
+        <div class="inputBox">
+          <input type="password" required> <i>Password</i>
+        </div>
+        <div class="links">
+          <a href="#" id="changeContentLink">SignUp</a>
+        </div>
+        <div class="inputBox">
+          <input type="submit" value="Login">
+        </div>
+      </div>
+    </div>
+    <div class="hidden content" id="changeform">
+      <h2>Sign Up</h2>
+      <div class="form ">
+        <div class="inputBox">
+          <input type="text" required> <i>Username</i>
+        </div>
+        <div class="inputBox">
+          <input type="email" required> <i>Email</i>
+        </div>
+        <div class="inputBox">
+          <input type="password" required> <i>Password</i>
+        </div>
+        <div class="inputBox">
+          <input type="password" required> <i>Repeat Password</i>
+        </div>
+        <div class="links">
+          <a href="#" id="changeContentLink">SignIn</a>
+        </div>
+        <div class="inputBox">
+          <input type="submit" value="Create Account">
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
