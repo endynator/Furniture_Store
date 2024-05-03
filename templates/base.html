@@ -4,7 +4,7 @@
     <title>{{ title }}</title>
     <meta charset="UTF-8">
     <!--<link rel="stylesheet" type="text/css"
-      href="{{ url_for('static', filename='css/main_style.css') }}">-->
+      href="{{ url_for('static', filename='css/main.css') }}">-->
     <link rel="stylesheet" type="text/css"
       href="{{ url_for('static', filename='css/bg.css') }}">
     <link rel="stylesheet" type="text/css"
@@ -18,60 +18,65 @@
     {% block head %}{% endblock %}
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
-      <a class="navbar-brand" href="#">Furniture</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false"
-        aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="#">Category</a>
-          </li>
-          {% for ddItem in dropdown_items %}
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="{{  }}" id="navbarDropdown"
-              role="button" data-toggle="dropdown" aria-haspopup="true"
-              aria-expanded="false">
-              {{ ddItem['name'] }}
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <div class="container">
-                <div class="row">
-                  <div class="col-md-4">
-                    <ul class="nav flex-column">
-                      {% for item in ddItem['items'] %}
-                      <li class="nav-item">
-                        <a class="nav-link" href="#">{{ item['name'] }}</a>
-                      </li>
-                      {% endfor %}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <!--  /.container  -->
-            </div>
-          </li>
-          {% endfor %}
-        </ul>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary navbar-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#"><i
+            class="fa-solid fa-circle-user"></i></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+          aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Features</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Pricing</a>
+            </li>
+            {% for category, data in dropdown_items.items() %}
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle"
+                role="button" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                {{ category }}
+              </a>
+              <ul class="dropdown-menu">
+                {% for item in data['items'] %}
+                <li>
+                  <a class="dropdown-item nav-link"
+                    href="Item/{{ category }}/{{ item['name'] }}#{{ item['id'] }}">
+                    {{ item['name'] }}
+                  </a>
+                </li>
+                {% endfor %}
+                <!--  /.container  -->
+              </ul>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        <li class="pfp nav-item">
+          <a class="nav-link" href="#"><i class="fas fa-user"></i></a>
+        </li>
       </div>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search"
-          aria-label="Search">
-        <button class="btn btn-outline-light my-2 my-sm-0"
-          type="submit">Search</button>
-      </form>
-
     </nav>
     <!-- Bootstrap JS -->
     <script
       src="{{ url_for('static', filename='bootstrap/js/jquery-3.5.1.slim.min.js') }}"></script>
     <script
       src="{{ url_for('static', filename='bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"></script>
+    <!-- JQuery -->
+    <script
+      src="{{ url_for('static', filename='scripts/jquery-3.7.1.min.js') }}"></script>
     <!-- Font Awesome JS (for icons) -->
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     {% block body %}{% endblock %}
