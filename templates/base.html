@@ -1,10 +1,16 @@
+<!--
+  I'm using bootstrap to make my life less misarable
+-->
 <!Doctype html>
 <html lang="en">
   <head>
     <title>{{ title }}</title>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--<link rel="stylesheet" type="text/css"
       href="{{ url_for('static', filename='css/main.css') }}">-->
+    <link rel="stylesheet" type="text/css"
+      href="{{ url_for('static', filename='css/main.css') }}">
     <link rel="stylesheet" type="text/css"
       href="{{ url_for('static', filename='css/bg.css') }}">
     <link rel="stylesheet" type="text/css"
@@ -29,15 +35,12 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav">
+            {% for it, boolean in Items.items() %}
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <a class="nav-link {% if boolean %}active{% endif %}"
+                aria-current="page" href="{{ it[1] }}">{{ it[0] }}</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Features</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Pricing</a>
-            </li>
+            {% endfor %}
             {% for category, data in dropdown_items.items() %}
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle"
@@ -49,7 +52,7 @@
                 {% for item in data['items'] %}
                 <li>
                   <a class="dropdown-item nav-link"
-                    href="Item/{{ category }}/{{ item['name'] }}#{{ item['id'] }}">
+                    href="Item/{{ category }}/{{ item['name'].split()[0] }}/">
                     {{ item['name'] }}
                   </a>
                 </li>

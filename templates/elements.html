@@ -1,0 +1,57 @@
+<style>
+  .product-card {
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 15px;
+      margin: 10px;
+      text-align: center;
+  }
+  .product-img {
+      max-width: 100%;
+      height: auto;
+  }
+  .rating {
+      color: #ffc107;
+  }
+  .stock-status.in-stock {
+      color: green;
+  }
+  .stock-status.out-of-stock {
+      color: red;
+  }
+</style>
+
+<div class="container">
+  {% for category, sub_categories in products_data.items() %}
+  <h2>{{ category }}</h2>
+  {% for sub_category, sub_data in sub_categories.items() %}
+  <div class="row">
+    {% for product in sub_data['items'] %}
+    <div class="col-md-4">
+      <div class="product-card main">
+        <img
+          src="../static/images/{{ category }}_{{ sub_category }}/{{ product.id }}.jpg"
+          alt="{{ product.name }}" class="product-img">
+        <h4 class="product-name">
+          <a href="Item/{{ category }}/{{ sub_category }}#{{ product.id }}" target="_blank">{{ product.name }}</a>
+        </h4>
+        <p class="product-price">${{ product.price }}</p>
+        <div class="rating">
+          {% for i in range(product.rating) %}
+          <span>&#9733;</span>
+          {% endfor %}
+          {% for i in range(5 - product.rating) %}
+          <span>&#9734;</span>
+          {% endfor %}
+        </div>
+        <p
+          class="stock-status {% if product.in_stock %}in-stock{% else %}out-of-stock{% endif %}">
+          {% if product.in_stock %}In Stock{% else %}Out of Stock{% endif %}
+        </p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endfor %}
+  {% endfor %}
+</div>
