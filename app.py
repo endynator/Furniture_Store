@@ -1,4 +1,4 @@
-from flask import Flask, send_file, render_template, redirect, url_for
+from flask import Flask, send_file, render_template, redirect, url_for, current_app
 import os
 import json
 
@@ -19,6 +19,18 @@ def load_json_data(base_dir):
                     category_data['items'].append(product_data)
     
     return data
+  
+def list_template_names():
+    templates_dir = os.path.join(current_app.root_path, 'templates')
+    template_names = []
+    
+    for root, dirs, files in os.walk(templates_dir):
+        for file in files:
+            if file.endswith('.html'):
+                file_name = os.path.splitext(file)[0] 
+                template_names.append(file_name)
+    
+    return template_names
 
 @app.route('/')
 def home():
@@ -29,10 +41,12 @@ def home():
 
 @app.route('/<string:doc_name>')
 def about(doc_name: str):
-    if (doc_name == 'index'):
+    if (doc_name not in list_template_names()):
+      print('Template was not found, redirecting to Home.')
       return home()
     return render_template('{}.html'.format(doc_name), title=doc_name,
                            dropdown_items=dropdown_items,
+                           products_data=products_data,
                            Items=Items)  
 
 @app.route('/Item/<string:category>/<int:id>')
