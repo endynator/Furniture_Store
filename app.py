@@ -29,6 +29,8 @@ def home():
 
 @app.route('/<string:doc_name>')
 def about(doc_name: str):
+    if (doc_name == 'index'):
+      return home()
     return render_template('{}.html'.format(doc_name), title=doc_name,
                            dropdown_items=dropdown_items,
                            Items=Items)  
