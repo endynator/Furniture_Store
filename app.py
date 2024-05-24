@@ -41,21 +41,36 @@ def home():
 
 @app.route('/<string:doc_name>')
 def about(doc_name: str):
-    if (doc_name not in list_template_names()):
-      print('Template was not found, redirecting to Home.')
-      return home()
+    if (doc_name not in templates):
+      # Handle exception
+      pass
     return render_template('{}.html'.format(doc_name), title=doc_name,
                            dropdown_items=dropdown_items,
                            products_data=products_data,
                            Items=Items)  
 
-@app.route('/Item/<string:category>/<int:id>')
-def getItem(category: str, id: int):
+def find_id(product_list, id: int) -> int:
+    for index, item in enumerate(product_list):
+        if item['id'] == id:
+            return index
+    return None
+
+@app.route('/Item/<string:category>/<string:sub_category>/<int:id>')
+def getItem(category: str, sub_category: str, id: int):
     item_name = dropdown_items[category]['items'][id - 1]['name']
     title = f'{item_name}'
-    return render_template('index.html', title=title, 
+    product_list = products_data[category][sub_category]['items']
+    index = find_id(product_list, id)
+    
+    if index is not None:
+        product_data = product_list[index]
+    else:
+        product_data = None  # Handle the case where the product is not found
+    
+    # Render a template for displaying a specific product
+    return render_template('product.html', title=title, 
                            dropdown_items=dropdown_items,
-                           Items=Items)
+                           product_data=product_data)
 
 if __name__ == '__main__':
   dropdown_items = {
@@ -83,6 +98,8 @@ if __name__ == '__main__':
            ('Contacts', 'contacts'): False,
            ('Stores', 'stores'): False
            }
+  with app.app_context():
+    templates = list_template_names()
   base_dir = 'data'
   products_data = load_json_data(base_dir)
   app.run(debug=True)
