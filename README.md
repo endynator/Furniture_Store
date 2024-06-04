@@ -1,5 +1,3 @@
-# Backend only project aimed for backend learning.
-
 ## Step-by-step guide
 1. Clone repository by running `git clone https://github.com/endynator/Furniture_Store`
 2. Open repository in the terminal.
